@@ -39,6 +39,7 @@ button {
   margin: 10px;
   cursor: pointer;
   position: relative;
+  touch-action: manipulation;
   background-color: #fafbfc;
   transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
@@ -64,12 +65,24 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin-bottom: 10px;
+  /* Source: https://stackoverflow.com/questions/5533636/add-a-horizontal-scrollbar-to-an-html-table */
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 th,
 td {
   border: 1px solid #ccc;
   padding: 8px;
+}
+
+/* Make first column sticky during horizontal scroll */
+td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: white;
 }
 
 /* HTML: <div class="ribbon">Your text content</div> Thanks https://css-generators.com/ribbon-shapes/*/
