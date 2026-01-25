@@ -36,6 +36,7 @@ button {
   padding: 5px 10px;
   border-radius: 10px;
   margin: 10px;
+  cursor: pointer;
 }
 
 div#addAndRemove {
