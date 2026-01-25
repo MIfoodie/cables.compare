@@ -1,0 +1,91 @@
+html {
+  font-size: 10px;
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-size: 350%;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  font-size: 100%;
+  margin-top: 50px;
+  color: gray;
+}
+
+svg {
+  padding: 5px;
+}
+
+a {
+  color: inherit;
+}
+
+select {
+  font-size: 145%;
+  padding: 5px;
+  border-radius: 10px;
+}
+button {
+  font-size: 145%;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+div#addAndRemove {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+/* HTML: <div class="ribbon">Your text content</div> Thanks https://css-generators.com/ribbon-shapes/*/
+.ribbon {
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+}
+.ribbon {
+  --f: 0.5em; /* control the folded part */
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 1.8;
+  padding-inline: 1lh;
+  padding-bottom: var(--f);
+  border-image: conic-gradient(#0008 0 0) 51% / var(--f);
+  clip-path: polygon(
+    100% calc(100% - var(--f)),
+    100% 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    var(--f) calc(100% - var(--f)),
+    0 100%,
+    0 calc(100% - var(--f)),
+    999px calc(100% - var(--f) - 999px),
+    calc(100% - 999px) calc(100% - var(--f) - 999px)
+  );
+  transform: translate(calc((cos(45deg) - 1) * 100%), -100%) rotate(-45deg);
+  transform-origin: 100% 100%;
+  background-color: #f03118; /* the main color  */
+}
+
+.ribbon:hover {
+  text-decoration: underline;
+}

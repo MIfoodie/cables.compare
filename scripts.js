@@ -1,4 +1,5 @@
 const cableTypes = {
+  "Choose a cable": [],
   Cat5e: ["1 Gbps", "100 m", "Home / Office"],
   Cat6: ["10 Gbps", "55 m", "Office"],
   Cat6A: ["10 Gbps", "100 m", "Enterprise"],
@@ -8,13 +9,22 @@ const cableTypes = {
 
 function createCableSelect(colIndex) {
   const select = document.createElement("select");
-
   Object.keys(cableTypes).forEach((type) => {
-    const option = document.createElement("option");
-    option.value = type;
-    option.textContent = type;
-    select.appendChild(option);
+    if (type !== "Choose a cable") {
+      const option = document.createElement("option");
+      option.value = type;
+      option.textContent = type;
+      select.appendChild(option);
+    }
   });
+
+  // Add "Choose a cable" as a disabled placeholder option at the start
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "Choose a cable";
+  placeholderOption.textContent = "Choose a cable";
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;
+  select.insertBefore(placeholderOption, select.firstChild);
 
   select.addEventListener("change", () => {
     updateColumn(colIndex, cableTypes[select.value]);
@@ -35,6 +45,15 @@ function addColumn() {
     } else {
       cell.textContent = "-";
     }
+  }
+}
+
+function removeColumn() {
+  const table = document.getElementById("myTable");
+  const colIndex = table.rows[0].cells.length - 1;
+
+  for (let row of table.rows) {
+    if (row.cells.length > 1) row.deleteCell(colIndex);
   }
 }
 
