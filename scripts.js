@@ -7,6 +7,28 @@ const cableTypes = {
   Coax: ["1 Gbps", "500 m", "TV / ISP"],
 };
 
+fetch("data.json")
+  .then((response) => response.json())
+  .then((data) => {
+    // Recursive function to find all 'name' values
+    function findNames(obj) {
+      if (Array.isArray(obj)) {
+        obj.forEach((item) => findNames(item));
+      } else if (typeof obj === "object" && obj !== null) {
+        Object.entries(obj).forEach(([key, value]) => {
+          if (key === "name") {
+            console.log(value); // Print the name value
+          } else {
+            findNames(value); // Recursively search deeper
+          }
+        });
+      }
+    }
+
+    findNames(data);
+  })
+  .catch((error) => console.error("Error loading JSON:", error));
+
 function createCableSelect(colIndex) {
   const select = document.createElement("select");
   Object.keys(cableTypes).forEach((type) => {
@@ -37,10 +59,11 @@ function addColumn() {
   const table = document.getElementById("myTable");
   const colIndex = table.rows[0].cells.length;
 
-  for (let row of table.rows) {
+  for (let i = 0; i < table.rows.length; i++) {
+    const row = table.rows[i];
     const cell = row.insertCell(-1);
 
-    if (row.parentElement.tagName === "THEAD") {
+    if (i === 0) {
       cell.appendChild(createCableSelect(colIndex));
     } else {
       cell.textContent = "-";
