@@ -86,10 +86,14 @@ td {
 td:first-child {
   position: sticky;
   left: 0;
-  z-index: 1;
-  background-color: white;
+  z-index: 2;
+  background-color: inherit;
+  /* keep the first column visually separated while scrolling */
+  box-shadow: 2px 0 5px -2px rgba(0, 0, 0, 0.1);
 }
-
+tr:nth-child(even) {
+  background-color: #dbdbdb;
+}
 /* HTML: <div class="ribbon">Your text content</div> Thanks https://css-generators.com/ribbon-shapes/*/
 .ribbon {
   font-size: 15px;
