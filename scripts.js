@@ -3,61 +3,60 @@ const cableData = {
     {
       name: "USB 2.0",
       connectors: ["Type-A", "Type-B", "Mini-USB", "Micro-USB"],
-      max_speed: "480 Mbps",
-      release_year: 2000,
+      "Max Speed": "480 Mbps",
+      "Release Year": 2000,
     },
     {
       name: "USB 3.0",
       connectors: ["Type-A", "Type-B", "Micro-B"],
-      max_speed: "5 Gbps",
-      release_year: 2008,
+      "Max Speed": "5 Gbps",
+      "Release Year": 2008,
     },
     {
       name: "USB 3.1",
-      max_speed: "10 Gbps",
-      release_year: 2013,
+      "Max Speed": "10 Gbps",
+      "Release Year": 2013,
     },
     {
       name: "USB 3.2",
-      max_speed: "20 Gbps",
-      release_year: 2017,
+      "Max Speed": "20 Gbps",
+      "Release Year": 2017,
     },
     {
       name: "USB4",
-      max_speed: "40 Gbps",
-      release_year: 2019,
+      "Max Speed": "40 Gbps",
+      "Release Year": 2019,
     },
   ],
   Display: [
     {
       name: "HDMI 1.4",
       max_resolution: "4K at 30Hz",
-      release_year: 2009,
+      "Release Year": 2009,
     },
     {
       name: "HDMI 2.0",
       max_resolution: "4K at 60Hz",
-      release_year: 2013,
+      "Release Year": 2013,
     },
     {
       name: "HDMI 2.1",
       max_resolution: "10K at 120Hz",
-      release_year: 2017,
+      "Release Year": 2017,
     },
     {
       name: "DisplayPort 1.2",
       max_resolution: "4K at 60Hz",
-      release_year: 2010,
+      "Release Year": 2010,
     },
     {
       name: "DisplayPort 1.4",
       max_resolution: "8K at 60Hz",
-      release_year: 2016,
+      "Release Year": 2016,
     },
   ],
 };
-
-console.log(Object.keys(cableData).length);
+const select = document.createElement("select");
 function createCableSelect(colIndex) {
   const select = document.createElement("select");
   for (var i = 0; i < Object.keys(cableData).length; i++) {
@@ -72,8 +71,10 @@ function createCableSelect(colIndex) {
     });
     select.appendChild(document.createElement("hr"));
     select.appendChild(optgroup);
-    select.addEventListener("change", (event) => updateColumn(event, colIndex));
   }
+  select.addEventListener("change", (event) => {
+    updateColumn(colIndex, event.target.value);
+  });
   return select;
 }
 
@@ -102,4 +103,21 @@ function removeColumn() {
   }
 }
 
-function updateColumn(colIndex, values) {}
+function updateColumn(colIndex, value) {
+  console.log("Updating column " + colIndex + " with value " + value);
+  const table = document.getElementById("myTable");
+  const item =
+    cableData.Display.find((d) => d.name === value) ||
+    cableData.USB.find((d) => d.name === value);
+  for (let i = 0; i < table.rows.length; i++) {
+    const category = table.rows[i].cells[0];
+    console.log(category.textContent);
+    const row = table.rows[i];
+    const cell = row.cells[colIndex];
+    for (let j = 0; j < Object.keys(item).length; j++) {
+      if (category.textContent === Object.keys(item)[j]) {
+        cell.textContent = item[Object.keys(item)[j]];
+      }
+    }
+  }
+}
