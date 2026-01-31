@@ -25,7 +25,12 @@ svg {
 a {
   color: inherit;
 }
-
+div#license {
+  margin-top: 7px;
+}
+svg {
+  margin-top: 7px;
+}
 a:hover {
   color: inherit;
   text-decoration: underline;
