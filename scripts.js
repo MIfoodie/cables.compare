@@ -1,57 +1,79 @@
-const cableTypes = {
-  "Choose a cable": [],
-  Cat5e: ["1 Gbps", "100 m", "Home / Office"],
-  Cat6: ["10 Gbps", "55 m", "Office"],
-  Cat6A: ["10 Gbps", "100 m", "Enterprise"],
-  Fiber: ["100+ Gbps", "10+ km", "Backbone"],
-  Coax: ["1 Gbps", "500 m", "TV / ISP"],
+const cableData = {
+  USB: [
+    {
+      name: "USB 2.0",
+      connectors: ["Type-A", "Type-B", "Mini-USB", "Micro-USB"],
+      max_speed: "480 Mbps",
+      release_year: 2000,
+    },
+    {
+      name: "USB 3.0",
+      connectors: ["Type-A", "Type-B", "Micro-B"],
+      max_speed: "5 Gbps",
+      release_year: 2008,
+    },
+    {
+      name: "USB 3.1",
+      max_speed: "10 Gbps",
+      release_year: 2013,
+    },
+    {
+      name: "USB 3.2",
+      max_speed: "20 Gbps",
+      release_year: 2017,
+    },
+    {
+      name: "USB4",
+      max_speed: "40 Gbps",
+      release_year: 2019,
+    },
+  ],
+  Display: [
+    {
+      name: "HDMI 1.4",
+      max_resolution: "4K at 30Hz",
+      release_year: 2009,
+    },
+    {
+      name: "HDMI 2.0",
+      max_resolution: "4K at 60Hz",
+      release_year: 2013,
+    },
+    {
+      name: "HDMI 2.1",
+      max_resolution: "10K at 120Hz",
+      release_year: 2017,
+    },
+    {
+      name: "DisplayPort 1.2",
+      max_resolution: "4K at 60Hz",
+      release_year: 2010,
+    },
+    {
+      name: "DisplayPort 1.4",
+      max_resolution: "8K at 60Hz",
+      release_year: 2016,
+    },
+  ],
 };
 
-fetch("data.json")
-  .then((response) => response.json())
-  .then((data) => {
-    // Recursive function to find all 'name' values
-    function findNames(obj) {
-      if (Array.isArray(obj)) {
-        obj.forEach((item) => findNames(item));
-      } else if (typeof obj === "object" && obj !== null) {
-        Object.entries(obj).forEach(([key, value]) => {
-          if (key === "name") {
-            console.log(value); // Print the name value
-          } else {
-            findNames(value); // Recursively search deeper
-          }
-        });
-      }
-    }
-
-    findNames(data);
-  })
-  .catch((error) => console.error("Error loading JSON:", error));
-
+console.log(Object.keys(cableData).length);
 function createCableSelect(colIndex) {
   const select = document.createElement("select");
-  Object.keys(cableTypes).forEach((type) => {
-    if (type !== "Choose a cable") {
+  for (var i = 0; i < Object.keys(cableData).length; i++) {
+    const optgroup = document.createElement("optgroup");
+    optgroup.label = Object.keys(cableData)[i];
+
+    cableData[Object.keys(cableData)[i]].forEach((item) => {
       const option = document.createElement("option");
-      option.value = type;
-      option.textContent = type;
-      select.appendChild(option);
-    }
-  });
-
-  // Add "Choose a cable" as a disabled placeholder option at the start
-  const placeholderOption = document.createElement("option");
-  placeholderOption.value = "Choose a cable";
-  placeholderOption.textContent = "Choose a cable";
-  placeholderOption.disabled = true;
-  placeholderOption.selected = true;
-  select.insertBefore(placeholderOption, select.firstChild);
-
-  select.addEventListener("change", () => {
-    updateColumn(colIndex, cableTypes[select.value]);
-  });
-
+      option.value = item.name;
+      option.textContent = item.name;
+      optgroup.appendChild(option);
+    });
+    select.appendChild(document.createElement("hr"));
+    select.appendChild(optgroup);
+    select.addEventListener("change", (event) => updateColumn(event, colIndex));
+  }
   return select;
 }
 
@@ -80,10 +102,4 @@ function removeColumn() {
   }
 }
 
-function updateColumn(colIndex, values) {
-  const table = document.getElementById("myTable");
-
-  for (let i = 1; i < table.rows.length; i++) {
-    table.rows[i].cells[colIndex].textContent = values[i - 1] ?? "-";
-  }
-}
+function updateColumn(colIndex, values) {}
