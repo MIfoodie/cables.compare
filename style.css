@@ -26,6 +26,11 @@ a {
   color: inherit;
 }
 
+a:hover {
+  color: inherit;
+  text-decoration: underline;
+}
+
 select {
   font-size: 145%;
   padding: 5px;
