@@ -5,12 +5,14 @@ const cableData = {
       connectors: ["Type-A", "Type-B", "Mini-USB", "Micro-USB"],
       "Max Speed": "480 Mbps",
       "Release Year": 2000,
+      "Alternate Names": ["Hi-Speed USB"],
     },
     {
       name: "USB 3.0",
       connectors: ["Type-A", "Type-B", "Micro-B"],
       "Max Speed": "5 Gbps",
       "Release Year": 2008,
+      "Alternate Names": ["SuperSpeed USB, USB 5Gbps"],
     },
     {
       name: "USB 3.1",
@@ -59,6 +61,10 @@ const cableData = {
 const select = document.createElement("select");
 function createCableSelect(colIndex) {
   const select = document.createElement("select");
+  const defaultOption = document.createElement("option");
+  defaultOption.textContent = "Select a Cable";
+  defaultOption.selected = defaultOption.disabled = true;
+  select.appendChild(defaultOption);
   for (var i = 0; i < Object.keys(cableData).length; i++) {
     const optgroup = document.createElement("optgroup");
     optgroup.label = Object.keys(cableData)[i];
@@ -73,6 +79,9 @@ function createCableSelect(colIndex) {
     select.appendChild(optgroup);
   }
   select.addEventListener("change", (event) => {
+    if (select.firstChild.textContent === "Select a Cable") {
+      select.removeChild(select.firstChild);
+    }
     updateColumn(colIndex, event.target.value);
   });
   return select;
@@ -104,18 +113,17 @@ function removeColumn() {
 }
 
 function updateColumn(colIndex, value) {
-  console.log("Updating column " + colIndex + " with value " + value);
   const table = document.getElementById("myTable");
   const item =
     cableData.Display.find((d) => d.name === value) ||
     cableData.USB.find((d) => d.name === value);
   for (let i = 0; i < table.rows.length; i++) {
     const category = table.rows[i].cells[0];
-    console.log(category.textContent);
     const row = table.rows[i];
     const cell = row.cells[colIndex];
     for (let j = 0; j < Object.keys(item).length; j++) {
       if (category.textContent === Object.keys(item)[j]) {
+        const text = item[Object.keys(item)[j]];
         cell.textContent = item[Object.keys(item)[j]];
       }
     }
