@@ -3,20 +3,82 @@
 
 <head>
     <link href="style.css" rel="stylesheet" />
+    <title>Cables.compare</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+    <!-- For Google SEO-->
+    <meta name="description" content="Free web tool to compare cables across types and specifications">
+    <meta name="keywords" content="cables" , "connectors" , "USB-C" , "USB-A" , "HDMI" , "displayport"
+        , "power delivery">
+    <meta name="author" content="MIfoodie">
+    <!-- For Open Graph-->
+    <meta property="og:title" content="cables.compare" />
+    <meta property="og:type" content="video.movie" />
+    <meta property="og:url" content="https://cables.compare/" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Free tool to compare cables across types and specifications" />
     <meta charset="UTF-8">
+    <!-- TODO: Add image for OpenGraph -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIfoodie</title>
+
 </head>
 
 <body>
-    <h1>MIfoodie's Site</h1>
-    <hdot5>Welcome to my personal website! Here you can find some of the projects I've worked on, as well as
-        some of my thoughts and musings on various topics. </hdot5>
-    <p><a href="/cables.html">Cable Tool</a></p>
-    <!--Footer-->
+    <h1>Welcome to cables.compare</h1>
+    <div id="addAndRemove">
+        <button onclick="addColumn()">Add Cable</button>
+        <button onclick="removeColumn()">Remove Cable</button>
+    </div>
+    <!-- Table-->
+    <table id="myTable">
+        <tbody>
+            <tr>
+                <td>Category</td>
+            </tr>
+            <tr>
+                <td>Release Year</td>
+            </tr>
+            <tr>
+                <td>Version</td>
+            </tr>
+            <tr>
+                <td>Spec</td>
+            </tr>
+            <tr>
+                <td>Max Speed</td>
+            </tr>
+            <tr>
+                <td>Power Delivery</td>
+            </tr>
+            <tr>
+                <td>Max Distance</td>
+            </tr>
+            <tr>
+                <td>Connectors</td>
+            </tr>
+            <tr>
+                <td>Alternate Names</td>
+            </tr>
+
+
+        </tbody>
+    </table>
+    <script src="scripts.js"></script>
+    <a href="https://en.wikipedia.org/wiki/Software_release_life_cycle#Pre-alpha">
+        <div class="ribbon">PRE-ALPHA</div>
+    </a>
+    <!-- Footer-->
     <footer>
         <hr>
-        <p>Designed by MIfoodie with assistance from 🤖 and 🌐</p>
+        FAQs: </br>
+        <a href="https://m.xkcd.com/2810/">How should I coil my cables for storage?</a></br>
+        <a href="https://m.xkcd.com/1892/">Why does this website exist?</a></br>
+        <a href="https://m.xkcd.com/2493/">Why is USB-AC missing?</a></br></br>
+        Designed by MIfoodie with assistance from 🤖 and 🌐</br>
         <div class="footer-logos">
             <a rel="me" href="https://social.vivaldi.net/@MIfoodie">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -39,6 +101,5 @@
         </div>
     </footer>
 </body>
-
 
 </html>
